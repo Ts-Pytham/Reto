@@ -8,3 +8,6 @@ global using System.ComponentModel.DataAnnotations;
 global using System.Linq.Expressions;
 global using APIReto.Core.Helpers;
 global using APIReto.Core.DTOs;
+global using APIReto.Core.Mappers;
+global using APIReto.Core.Interfaces;
+global using Microsoft.AspNetCore.Mvc;

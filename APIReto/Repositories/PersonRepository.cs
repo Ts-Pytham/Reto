@@ -36,6 +36,7 @@ public class PersonRepository : Repository<Person>, IPersonRepository
 
         var personsList = await Context.Set<Person>()
                                        .Where(filters)
+                                       .Select(x => x.ToPersonDTO())
                                        .ToListAsync();
         return personsList;
     }
