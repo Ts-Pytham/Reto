@@ -9,6 +9,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+new EnvLoader()
+               .AddEnvFile("info.env")
+              .Load();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
