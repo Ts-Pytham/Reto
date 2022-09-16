@@ -1,4 +1,7 @@
-﻿namespace APIReto.Repositories;
+﻿using System.Net;
+using System.Xml.Linq;
+
+namespace APIReto.Repositories;
 
 public class PersonRepository : Repository<Person>, IPersonRepository
 {
@@ -6,34 +9,9 @@ public class PersonRepository : Repository<Person>, IPersonRepository
     {
     }
 
-    public async Task<IEnumerable<PersonDTO>> GetPersonsAsync(int? DNI, string Name, string City)
+    public async Task<IEnumerable<PersonDTO>> GetPersonsAsync(Expression<Func<Person, bool>> filters)
     {
-        var filters = QueryFilter.True<Person>();
-
-        if(DNI is not null)
-        {
-            filters = filters.And(x => x.DNI == DNI);
-        }
-
-        if(Name is not null)
-        {
-            if(Name.Split(" ").Length > 1) // TO DO: Change it!
-            {
-                var names = Name.Split(" ");
-                filters = filters.And(x => x.Name == names[0] && x.LastName == names[1]);
-            }
-            else
-            {
-                filters = filters.And(x => x.Name == Name || x.LastName == Name);
-            }
-
-        }
-
-        if(City is not null)
-        {
-            filters = filters.And(x => x.City == City);
-        }
-
+        
         var personList = await Context.Set<Person>()
                                .Where(filters)
                                .Select(p => p.ToPersonDTO())
