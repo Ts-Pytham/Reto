@@ -2,5 +2,5 @@
 
 public interface IPersonRepository : IRepository<Person>
 {
-    Task<IEnumerable<PersonDto>> GetPersonsAsync(PersonDto personDto);
+    Task<IEnumerable<PersonDTO>> GetPersonsAsync(int? DNI, string Name, string City);
 }

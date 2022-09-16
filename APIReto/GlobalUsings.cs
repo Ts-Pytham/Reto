@@ -5,3 +5,6 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using DotEnv.Core;
 global using System.ComponentModel.DataAnnotations;
+global using System.Linq.Expressions;
+global using APIReto.Core.Helpers;
+global using APIReto.Core.DTOs;
