@@ -11,7 +11,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         _entities = _context.Set<TEntity>();
     }
 
-    public async virtual Task<TEntity> GetByIdAsync(Guid id)
+    public async virtual Task<TEntity> GetByIdAsync(long id)
     => await _entities.Where(entity => entity.Id == id).FirstOrDefaultAsync();
 
     public virtual ValueTask<EntityEntry<TEntity>> InsertAsync(TEntity entity)
