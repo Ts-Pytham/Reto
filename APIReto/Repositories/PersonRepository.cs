@@ -12,7 +12,7 @@ public class PersonRepository : Repository<Person>, IPersonRepository
 
         if(DNI is not null)
         {
-            filters.And(x => x.DNI == DNI);
+            filters = filters.And(x => x.DNI == DNI);
         }
 
         if(Name is not null)
@@ -20,24 +20,25 @@ public class PersonRepository : Repository<Person>, IPersonRepository
             if(Name.Split(" ").Length > 1) // TO DO: Change it!
             {
                 var names = Name.Split(" ");
-                filters.And(x => x.Name == names[0] && x.LastName == names[1]);
+                filters = filters.And(x => x.Name == names[0] && x.LastName == names[1]);
             }
             else
             {
-                filters.And(x => x.Name == Name || x.LastName == Name);
+                filters = filters.And(x => x.Name == Name || x.LastName == Name);
             }
 
         }
 
         if(City is not null)
         {
-            filters.And(x => x.City == City);
+            filters = filters.And(x => x.City == City);
         }
 
-        var personsList = await Context.Set<Person>()
-                                       .Where(filters)
-                                       .Select(x => x.ToPersonDTO())
-                                       .ToListAsync();
-        return personsList;
+        var personList = await Context.Set<Person>()
+                               .Where(filters)
+                               .Select(p => p.ToPersonDTO())
+                               .ToListAsync();
+
+        return personList;
     }
 }
