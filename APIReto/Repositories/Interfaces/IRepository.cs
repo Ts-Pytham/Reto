@@ -2,7 +2,7 @@
 
 public interface IRepository<TEntity> where TEntity : Entity
 {
-    Task<TEntity> GetByIdAsync(int id);
-    void Insert(TEntity entity);
+    Task<TEntity> GetByIdAsync(Guid id);
+    ValueTask<EntityEntry<TEntity>> InsertAsync(TEntity entity);
     Task<int> SaveAsync();
 }
