@@ -11,3 +11,6 @@ global using APIReto.Core.DTOs;
 global using APIReto.Core.Mappers;
 global using APIReto.Core.Interfaces;
 global using Microsoft.AspNetCore.Mvc;
+global using APIReto.Repositories;
+global using APIReto.Core.Business;
+global using APIReto.Core.Extensions;
