@@ -21,7 +21,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Core\Business\" />
     <Folder Include="Core\Interfaces\" />
-    <Folder Include="Core\DTOs\" />
     <Folder Include="Core\Mappers\" />
     <Folder Include="Core\Helpers\" />
   </ItemGroup>
