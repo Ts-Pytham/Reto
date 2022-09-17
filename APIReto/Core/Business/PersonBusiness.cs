@@ -43,8 +43,8 @@ public class PersonBusiness : IPersonBusiness
     {
         var path = Path.GetTempPath() + Guid.NewGuid().ToString() + ".xlsx";
         try
-        {  
-
+        {
+            if (!Path.GetExtension(file.FileName).Contains("xlsx")) return 0;
             using (var stream = File.Create(path))
             {
                 await file.CopyToAsync(stream);
