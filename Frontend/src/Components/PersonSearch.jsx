@@ -5,12 +5,13 @@ import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import UploadIcon from '@mui/icons-material/Upload';
+import { styled } from '@mui/material/styles';
 
 
 const PersonSearch = () => {
@@ -84,6 +85,26 @@ const PersonSearch = () => {
         
     }
 
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+          border: 0,
+        },
+    }));
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+          backgroundColor: theme.palette.common.black,
+          color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+          fontSize: 14,
+        },
+    }));
+
     return(
         <div style={{paddingTop:"10px"}}>
             <Grid container spacing={1} style={{justifyContent:"center", marginLeft:"5px", marginRight:"5px"}} columns={12}>
@@ -97,42 +118,39 @@ const PersonSearch = () => {
 
                 <Grid item xs={12} md={12}>
                     <TextField  name="city" type="search" label="Localidad" onChange={handleInputChange}/>
-                </Grid>
+                </Grid> 
 
-                <Grid item xs={2} md={2}>
-                    <Button style={{verticalAlign:"center", marginTop:"10px"}} onClick={() => handleEvent(search.dni, search.city, search.name)} variant="outlined"><SearchIcon/></Button>
-                </Grid>
-
-                <Grid item xs={2} md={2}>
+                <Grid item xs={12} md={12} >
+                    <Button variant="outlined" onClick={() => handleEvent(search.dni, search.city, search.name)} style={{margin:"5px"}} ><SearchIcon/></Button>
                     <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style={{ display: 'none' }} onChange={() => LoadFile()} id="contained-button-file"/>
                     <label htmlFor="contained-button-file">
-                        <Button style={{verticalAlign:"center", marginTop:"10px"}} variant="outlined" component="span"><UploadIcon/></Button>
+                        <Button style={{verticalAlign:"center"}} variant="outlined" component="span"><UploadIcon/></Button>
                     </label>
                 </Grid>
+
             </Grid>
+
             <TableContainer component={Paper}>
-                <Table  aria-label="simple table">
+                <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Nombre</TableCell>
-                            <TableCell align="right">DNI</TableCell>
-                            <TableCell align="right">Dirección</TableCell>
-                            <TableCell align="right">Localidad</TableCell>
+                            <StyledTableCell>Nombre</StyledTableCell>
+                            <StyledTableCell align="right">DNI</StyledTableCell>
+                            <StyledTableCell align="right">Dirección</StyledTableCell>
+                            <StyledTableCell align="right">Localidad</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {personList.map((row, i) => (
-                            <TableRow
-                            key={i}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                            <TableCell component="th" scope="row">
+                            <StyledTableRow
+                            key={i}>
+                            <StyledTableCell component="th" scope="row">
                                 {row.fullName}
-                            </TableCell>
-                            <TableCell align="right">{row.dni}</TableCell>
-                            <TableCell align="right">{row.address}</TableCell>
-                            <TableCell align="right">{row.city}</TableCell>
-                            </TableRow>
+                            </StyledTableCell>
+                            <StyledTableCell align="right">{row.dni}</StyledTableCell>
+                            <StyledTableCell align="right">{row.address}</StyledTableCell>
+                            <StyledTableCell align="right">{row.city}</StyledTableCell>
+                            </StyledTableRow>
                         ))}
                     </TableBody>
                 </Table>
