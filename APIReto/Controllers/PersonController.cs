@@ -25,7 +25,7 @@ public class PersonController : ControllerBase
 	}
 
     [HttpPost]
-    public async Task<ActionResult<int>> AddPersons(IFormFile file)
+    public async Task<ActionResult<int>> AddPersons([Required]IFormFile file)
     {
         var result = await _personBusiness.InsertPersonsAsync(file);
 
