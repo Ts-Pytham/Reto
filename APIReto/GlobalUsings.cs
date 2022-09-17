@@ -14,3 +14,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using APIReto.Repositories;
 global using APIReto.Core.Business;
 global using APIReto.Core.Extensions;
+global using Microsoft.AspNetCore.Http;
+global using SpreadsheetLight;

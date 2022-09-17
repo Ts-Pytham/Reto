@@ -23,4 +23,17 @@ public class PersonController : ControllerBase
 		return NotFound();
 
 	}
+
+    [HttpPost]
+    public async Task<ActionResult<int>> AddPersons(IFormFile file)
+    {
+        var result = await _personBusiness.InsertPersonsAsync(file);
+
+        if (result == 1)
+        {
+            return Ok();
+        }
+        return BadRequest();
+
+    }
 }
