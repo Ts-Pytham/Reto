@@ -41,10 +41,11 @@ public class PersonBusiness : IPersonBusiness
 
     public async Task<int> InsertPersonsAsync(IFormFile file)
     {
+        if (!Path.GetExtension(file.FileName).Contains("xlsx")) return 0;
         var path = Path.GetTempPath() + Guid.NewGuid().ToString() + ".xlsx";
         try
         {  
-
+            
             using (var stream = File.Create(path))
             {
                 await file.CopyToAsync(stream);
