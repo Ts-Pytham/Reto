@@ -56,7 +56,7 @@ const PersonSearch = () => {
             };
 
             try{
-                const response = await fetch(`https://localhost:7188/api/Person`, options);
+                const response = await fetch(`https://apireto.azure-api.net/retoApiPrueba/api/Person`, options);
             if(response.ok){
                 alert("El archivo se cargo correctamente");
             }
@@ -70,7 +70,7 @@ const PersonSearch = () => {
     }
     async function handleEvent(dni, city, name){    
         try{   
-            const response = await fetch(`https://localhost:7188/api/Person?DNI=${dni}&Name=${name}&City=${city}`);
+            const response = await fetch(`https://apireto.azure-api.net/retoApiPrueba/api/Person?DNI=${dni}&Name=${name}&City=${city}`);
             if(response.ok){
                 const result = await response.json();
                 ChangePersonList(result);
